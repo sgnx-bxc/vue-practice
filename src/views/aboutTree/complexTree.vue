@@ -1,0 +1,23 @@
+<template>
+  <div class="complexTree-page">complexTree</div>
+</template>
+
+<script>
+export default {
+  name: 'complexTree',
+  mounted() {
+    this.$message.info('页面还在建设中。。。')
+  }
+}
+</script>
+
+<style lang="less">
+.complexTree-page {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+</style>

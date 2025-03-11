@@ -1,0 +1,176 @@
+body {
+  font-family: 'Alibaba-PuHuiTi-Regular', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Noto Sans SC',
+    'Microsoft YaHei', '微软雅黑', Tahoma, Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* 暂无数据的背景 */
+.edr-nonechartdata {
+  background: url('~@/assets/img/common/nonedata.png') no-repeat center;
+  background-size: auto 100%;
+}
+
+/** 默认滚动条 非chrome的部分浏览器有效，如firefox有效 **/
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c7c9cc #eaecef;
+}
+
+/** 默认滚动条 在chrome浏览器有效 **/
+// 整体部分
+::-webkit-scrollbar {
+  max-height: 12px;
+  max-width: 12px;
+}
+// 滑轨
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 4px;
+}
+// 滑块
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border-style: dashed;
+  border-color: transparent;
+  border-width: 4px;
+  background-color: rgba(157, 165, 183, 0.4);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(157, 165, 183, 0.7);
+  border-width: 6px;
+}
+
+/** el-scrollbar滚动条 **/
+.el-scrollbar {
+  .el-scrollbar__bar {
+    opacity: 1;
+    transition: none;
+    .el-scrollbar__thumb {
+      background-color: rgba(144, 147, 153, 0.5);
+    }
+    &.is-horizontal {
+      display: none;
+    }
+  }
+  .el-scrollbar__wrap {
+    overflow-x: hidden;
+  }
+  .el-scrollbar__thumb {
+    transition: none;
+  }
+}
+.el-select-dropdown .el-scrollbar__wrap {
+  overflow-x: scroll;
+}
+
+/** loading样式 **/
+.el-loading-mask {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/** 加上暂无数据样式的底部横线 **/
+.el-table__empty-block {
+  border-bottom: 1px solid #ebeef5;
+}
+
+/** 可选 **/
+.salaxy-user-select {
+  user-select: text;
+}
+
+/** 文字提示太长会超出可视区域，需要限制最大宽度 **/
+.el-tooltip__popper {
+  max-width: 500px;
+}
+
+/** el下拉菜单样式 **/
+.el-dropdown-menu {
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 3px 3px 7px 0 rgba(31, 41, 72, 0.15);
+  .el-dropdown-menu__item {
+    min-width: 100px;
+    text-align: center;
+    font-weight: normal;
+    border-top: 1px solid #e5e8ea;
+  }
+  .el-dropdown-menu__item:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 0;
+  }
+  .el-dropdown-menu__item:nth-last-of-type(1) {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .el-dropdown-menu__item:focus,
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    background-color: #fff;
+    color: #409eff;
+  }
+}
+
+// 安全报告
+.content-official-title1 {
+  font-size: 32px;
+  font-family: 'Alibaba-PuHuiTi-Medium';
+  text-align: center;
+  color: #303133;
+  line-height: 38px;
+}
+.content-official-title2 {
+  display: flex;
+  text-align: left;
+  margin-top: 30px;
+  .title2-label {
+    min-width: 170px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 16px;
+    color: #fff;
+    padding-left: 15px;
+    background: linear-gradient(-120deg, transparent 20px, #76aaf0 0, #3a86f0)
+      100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    position: relative;
+    .title-white {
+      width: 10px;
+      height: 150%;
+      background: #fff;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: skewX(30deg);
+    }
+  }
+  .title2-value {
+    align-self: flex-end;
+    width: calc(100% - 180px);
+    height: 6px;
+    background: linear-gradient(90deg, #7faff1 0%, #c8dbf5 50%, #fff 100%);
+  }
+}
+.content-official-title3 {
+  text-align: left;
+  font-size: 16px;
+  font-family: 'Alibaba-PuHuiTi-Bold';
+  color: #2b4f83;
+  margin-top: 30px;
+}
+.content-official-title4 {
+  text-align: left;
+  font-family: 'Alibaba-PuHuiTi-Bold';
+  color: #2b4f83;
+  margin-top: 30px;
+}
+.content-official-label {
+  margin-top: 15px;
+  text-align: left;
+  color: #313131;
+  line-height: 22px;
+}
+.content-official-label-span {
+  font-family: 'Alibaba-PuHuiTi-Bold';
+}
