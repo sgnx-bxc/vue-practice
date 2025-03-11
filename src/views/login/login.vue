@@ -5,8 +5,8 @@
       <!-- 内嵌文字 -->
       <div class="bg-text">
         <div class="welcom-text">欢迎登录</div>
-        <div class="name-text">终端检测与响应平台</div>
-        <div class="eng-text">Welcome to Endpoint Detection and Response</div>
+        <div class="name-text">My Reaction Platform</div>
+        <div class="eng-text">Welcome to My Reaction Platform</div>
         <div class="sign-text"></div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-const title = '终端检测与响应平台'
+const title = 'My Reaction Platform'
 
 export default function getPageTitle(pageTitle) {
   if (pageTitle) {
