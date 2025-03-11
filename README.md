@@ -9,53 +9,53 @@
 自定义指令utils/directive，自定义混入utils/mixins
 部分与组件联合使用的js可直接放在组件目录下
 
--- 全局自定义指令
-v-copyText：复制文本
-v-dialogDrag: 弹窗拖拽
-v-hasPermission：按钮权限
-v-inputFilter:int：限制文本框
--- 全局工具类
-mixins:
-    leavePage.js：离开页面提示
-    newHashMixin.js：版本更新提示
-websocket:
-    heartbeat.js：心跳封装
-    websocket.js：websocket二次封装   
-convertCount.js：数据单位转换
-dataFunction.js：数据结构转换
-dict.js：字典枚举值，映射列表，工具类
-flexible.js: 淘宝rem解决方案
-ipv4Util.js：各种ipv4形式校验
-jsencryptjs：rsa加密方法
-pageTitle.js：浏览器标签文本
-tooltip.js：echarts自动轮播
-urlUtils.js：url方法
-validateUtils.js：校验工具
-vueBus.js：bus二次封装
-webStorage.js：本地存储二次封装
--- 全局挂载项
-$router：vue路由
-$store：vue状态管理
-$db：webStorage
-$echarts：echarts
-$bus：事件总线
-$moment：日期时间处理类
+ * -- 全局自定义指令
+ * v-copyText：复制文本
+ * v-dialogDrag: 弹窗拖拽
+ * v-hasPermission：按钮权限
+ * v-inputFilter:int：限制文本框
+ * -- 全局工具类
+ * mixins:
+ *     leavePage.js：离开页面提示
+ *     newHashMixin.js：版本更新提示
+ * websocket:
+ *     heartbeat.js：心跳封装
+ *     websocket.js：websocket二次封装   
+ * convertCount.js：数据单位转换
+ * dataFunction.js：数据结构转换
+ * dict.js：字典枚举值，映射列表，工具类
+ * flexible.js: 淘宝rem解决方案
+ * ipv4Util.js：各种ipv4形式校验
+ * jsencryptjs：rsa加密方法
+ * pageTitle.js：浏览器标签文本
+ * tooltip.js：echarts自动轮播
+ * urlUtils.js：url方法
+ * validateUtils.js：校验工具
+ * vueBus.js：bus二次封装
+ * webStorage.js：本地存储二次封装
+ * -- 全局挂载项
+ * $router：vue路由
+ * $store：vue状态管理
+ * $db：webStorage
+ * $echarts：echarts
+ * $bus：事件总线
+ * $moment：日期时间处理类
 
 # 三、公共样式
-公共样式统一放在style目录
-common.less元素公共样式
-fonts.less自定义字体
-variable.less全局自定义变量
-skin目录为主体样式文件，即组件级公共样式
-
--- 已有default.less公共样式类，类名：default-组件名-style
-default-message-style：询问框样式
-default-dialog-style：弹出对话框样式
-default-form-style：表单样式
-default-table-title-style：表格标题和整体操作按钮样式
-default-header-style：页面标题样式
-default-page-tabs：页面级tabs样式
-default-tabs：表格级tabs样式
+ * 公共样式统一放在style目录
+ * common.less元素公共样式
+ * fonts.less自定义字体
+ * variable.less全局自定义变量
+ * skin目录为主体样式文件，即组件级公共样式
+ * 
+ * -- 已有default.less公共样式类，类名：default-组件名-style
+ * default-message-style：询问框样式
+ * default-dialog-style：弹出对话框样式
+ * default-form-style：表单样式
+ * default-table-title-style：表格标题和整体操作按钮样式
+ * default-header-style：页面标题样式
+ * default-page-tabs：页面级tabs样式
+ * default-tabs：表格级tabs样式
 
 # 四、静态资源
 图片放置src/assets/img
@@ -65,27 +65,27 @@ default-tabs：表格级tabs样式
 接口调用方法统一放在src/api/request目录，菜单页面的接口放在对应js，js内引入封装的请求处理方法
 import { getdata } from '@/api/axios/request'
 用export对外暴露自定义的接口调用方法，例如：
-//  获取用户权限
-export const welcome = () => {
-  return getdata('GET', `${urlPrefix.system}welcome`)
-}
-在组件中使用：
-import { welcome } from '@/api/request/common'
-const res = await welcome()
-
-导出方法exportReq
+ * //  获取用户权限
+ * export const welcome = () => {
+ *   return getdata('GET', `${urlPrefix.system}welcome`)
+ * }
+ * 在组件中使用：
+ * import { welcome } from '@/api/request/common'
+ * const res = await welcome()
+ * 
+ * 导出方法exportReq
 
 # 六、公共组件
 路由页面内自己的组件之间放置在views/对应页面组件目录/components。
 公共组件必须具有一定通用性，目录为components
 
 -- 已有组件
-table：表格组件
-chart：echarts图表组件
-flexboard：flex布局
-form：表单
-largeScreen：大屏
-tree：树
+ * table：表格组件
+ * chart：echarts图表组件
+ * flexboard：flex布局
+ * form：表单
+ * largeScreen：大屏
+ * tree：树
 
 
 # 七、单点登录/认证跳转
@@ -108,18 +108,18 @@ mock的开关在public/config/sysConfig.js的mockInterface中配置，支持两�
 其中router/router.js实例化路由对象及路由守卫的封装，router/constantRoutes.js为无需登录的路由配置，router/asyncRoutes.js为项目菜单动态路由配置，router/pageRoutes.js为脱离布局容器的页面组件动态路由配置。
 该异步路由采取分离模式（路由结构后端返回，前端只关注异步路由本身），通过path作为标准值匹配前后端路由
 项目菜单路由参数为：
-export default [
-  {
-    path: '/aboutEcharts',
-    component: () => import('@/views/aboutEcharts/dashboard.vue'),
-    name: 'dashboard',
-    meta: {
-      keepAlive: true
-    }
-  },
-]
-path：路由路径，用于和后端匹配该路由是否要添加到路由表中
-component：改路由的二级组件
-name：组件名称
-meta：元数据
-    keepAlive：是否加入页签缓存中
+ * export default [
+ *   {
+ *     path: '/aboutEcharts',
+ *     component: () => import('@/views/aboutEcharts/dashboard.vue'),
+ *     name: 'dashboard',
+ *     meta: {
+ *       keepAlive: true
+ *     }
+ *   },
+ * ]
+ * path：路由路径，用于和后端匹配该路由是否要添加到路由表中
+ * component：改路由的二级组件
+ * name：组件名称
+ * meta：元数据
+ *     keepAlive：是否加入页签缓存中
