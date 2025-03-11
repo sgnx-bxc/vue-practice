@@ -5,7 +5,7 @@ const timeStamp = new Date().getTime()
 const webpack = require('webpack')
 module.exports = {
   publicPath: '/',
-  outputDir: 'edr-web-dist',
+  outputDir: 'my-web-dist',
   devServer: {
     host: '0.0.0.0',
     port: 8080,

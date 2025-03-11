@@ -1,4 +1,4 @@
-# edr-web
+# my-web
 
 # 一、全局配置文件
 全局配置文件为public/config/sysConfig.js，在public/index.html中引入并挂在window对象下。
