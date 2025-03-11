@@ -64,7 +64,7 @@ export default {
           series: [
             {
               type: 'wordCloud',
-              maskImage: maskImage, // 自定义形状
+              // maskImage: maskImage, // 自定义形状
               gridSize: 10, // 控制词云图的网格大小，值越大词语之间的间距越大
               sizeRange: [14, 36], // 控制词语的大小范围
               rotationRange: [0, 90], // 控制词语的旋转角度范围

@@ -52,7 +52,6 @@ async function localBeforeEach(to, from, next) {
   document.title = getPageTitle(to.meta.name)
   const token = store.state.account.token
   const accessToken = to.query.accessToken
-  debugger
   if (!accessToken && !token.length && to.path !== PAGELOGIN) {
     // 未登录，跳转登录页面
     const toFullPath = to.fullPath || ''

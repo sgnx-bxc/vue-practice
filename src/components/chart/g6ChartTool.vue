@@ -32,6 +32,9 @@ export default {
   watch: {
     isCollapse() {
       this.resizeChart()
+    },
+    $route() {
+      this.resizeChart()
     }
   },
   mounted() {
@@ -55,10 +58,13 @@ export default {
     },
     resizeChart() {
       if (this.graph) {
-        const newWidth = document.getElementById(this.id).clientWidth
-        const newHeight = document.getElementById(this.id).clientHeight
-        this.graph.changeSize(newWidth, newHeight)
-        this.graph.fitView()
+        const realDom = document.getElementById(this.id)
+        if (realDom) {
+          const newWidth = document.getElementById(this.id).clientWidth
+          const newHeight = document.getElementById(this.id).clientHeight
+          this.graph.changeSize(newWidth, newHeight)
+          this.graph.fitView()
+        }
       }
     }
   }

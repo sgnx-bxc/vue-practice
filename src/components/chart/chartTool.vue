@@ -56,6 +56,9 @@ export default {
     },
     isCollapse() {
       this.resizeChart()
+    },
+    $route() {
+      this.resizeChart()
     }
   },
   mounted() {
