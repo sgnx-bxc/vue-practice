@@ -195,17 +195,19 @@ function getAsyncRouterRightsLoop(menuList, menusBack, newMenuList = []) {
   menusBack.forEach((menu) => {
     if (!menu.children) {
       const needObj = menuList.find((list) => list.path === menu.menuPath)
-      const obj = {
-        path: menu.menuPath,
-        component: needObj.component,
-        name: needObj.name,
-        meta: {
-          name: menu.menuName,
-          iconClass: menu.menuIcon,
-          keepAlive: needObj.meta.keepAlive
+      if (needObj) {
+        const obj = {
+          path: menu.menuPath,
+          component: needObj.component,
+          name: needObj.name,
+          meta: {
+            name: menu.menuName,
+            iconClass: menu.menuIcon,
+            keepAlive: needObj.meta.keepAlive
+          }
         }
+        newMenuList.push(obj)
       }
-      newMenuList.push(obj)
     } else {
       getAsyncRouterRightsLoop(menuList, menu.children, newMenuList)
     }
@@ -213,11 +215,32 @@ function getAsyncRouterRightsLoop(menuList, menusBack, newMenuList = []) {
   return newMenuList
 }
 
-// 获取独立页面权限路由 NNNN 需要修改
+// 获取独立页面权限路由
 function getAsyncPageRouterRights(menusBack) {
-  let newMenuList = pageRoutes.filter((menu) => {
-    const flag = menusBack.indexOf(parseInt(menu.meta.activeId)) !== -1
-    return flag
+  const list = pageRoutes
+  let newlist = []
+  newlist = getAsyncPageRouterRightsLoop(list, menusBack)
+  return newlist
+}
+
+// 获取独立页面权限路由-递归
+function getAsyncPageRouterRightsLoop(menuList, menusBack, newMenuList = []) {
+  menusBack.forEach((menu) => {
+    if (!menu.children) {
+      const needObj = menuList.find((list) => list.path === menu.menuPath)
+      if (needObj) {
+        const obj = {
+          path: menu.menuPath,
+          component: needObj.component,
+          meta: {
+            name: menu.menuName
+          }
+        }
+        newMenuList.push(obj)
+      }
+    } else {
+      getAsyncPageRouterRightsLoop(menuList, menu.children, newMenuList)
+    }
   })
   return newMenuList
 }

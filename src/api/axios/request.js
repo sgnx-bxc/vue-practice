@@ -191,6 +191,7 @@ export const getdata = function (
   if (timeout !== null) {
     service.timeout = timeout
   }
+  console.log(service)
   return axiosService(service)
 }
 

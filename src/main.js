@@ -14,6 +14,7 @@ import 'zrender/lib/svg/svg'
 import G6 from '@antv/g6'
 // 样式
 import 'normalize.css'
+import '@/style/animate.less'
 import '@/style/common.less'
 import '@/style/fonts.less'
 import '@/style/skin/default.less'

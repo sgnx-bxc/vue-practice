@@ -25,6 +25,8 @@
     "sortablejs": "^1.15.0",
     "useless-files-webpack-plugin": "^1.0.1",
     "vue": "^2.6.10",
+    "vue-count-to": "^1.0.13",
+    "vue-grid-layout": "^2.3.12",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },

@@ -46,6 +46,7 @@ export default {
   data() {
     return {
       assetTypeTree: '',
+      assetSearch: '',
       assetActiveTagDict: allDict.assetActiveTagDict,
       ifFilterDict: setdictKey(allDict.ifDict, 'label', 'text')
     }
@@ -58,6 +59,7 @@ export default {
   methods: {
     searchByAside(params) {
       this.assetTypeTree = params.assetTypeTree
+      this.assetSearch = params.assetSearch
       this.searchInfo.activeTag = ''
       this.$refs.tableformRef.reset()
       this.$refs.tableRef.clearSelection()
@@ -87,7 +89,8 @@ export default {
       }
     },
     initTable() {
-      this.searchInfo.assetType = this.assetTypeTree || ''
+      this.searchInfo.assetTypeTree = this.assetTypeTree
+      this.searchInfo.assetSearch = this.assetSearch || 0
       const option = {
         tableTop: 56,
         pageSize: 20,

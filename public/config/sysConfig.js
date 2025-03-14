@@ -22,6 +22,9 @@ const sysConfig = {
       /** 工作台 */
       postboardsysInfo: false, // 上方总览信息统计
       postboardoverview: false, // 下方图表信息统计
+      /** Grid布局 */
+      postgridallCard: false, // 所有卡片
+      postgridlayout: false, // 卡片布局
       /** 系统管理 */
       postuserlist: false, // 账号管理-查询用户
       postrolelist: false, // 账号管理-查询角色

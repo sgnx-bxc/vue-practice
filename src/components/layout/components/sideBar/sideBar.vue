@@ -32,14 +32,12 @@ export default {
   props: ['isCollapse'],
   data() {
     return {
+      menuList: this.getMenuList(),
       menuActive: '',
       keyChange: ''
     }
   },
   computed: {
-    menuList() {
-      return this.$store.getters['account/getMenusBack']
-    },
     userName() {
       return this.$store.state.account.user.name
     }
@@ -54,6 +52,34 @@ export default {
     this.$bus.$on('menuActiveChange', this.getActiveIndex)
   },
   methods: {
+    // 将所有的权限路由过滤为异步路由
+    getMenuList() {
+      let menuList = []
+      const allAsyncMenusOrigin = this.$store.getters['account/getMenusBack']
+      const rightListOrigin = this.$store.getters['system/getAsyncRouter']
+      if (allAsyncMenusOrigin && rightListOrigin) {
+        const allAsyncMenus = JSON.parse(JSON.stringify(allAsyncMenusOrigin))
+        const rightList = JSON.parse(JSON.stringify(rightListOrigin))
+        const rightPath = rightList.map((route) => route.path)
+        menuList = this.filterMenusByPaths(allAsyncMenus, rightPath)
+      }
+      return menuList
+    },
+    // 定义过滤函数
+    filterMenusByPaths(menus, paths) {
+      let filteredMenus = []
+      menus.forEach((menu) => {
+        if (menu.children) {
+          menu.children = this.filterMenusByPaths(menu.children, paths)
+          if (menu.children.length > 0) {
+            filteredMenus.push(menu)
+          }
+        } else if (paths.includes(menu.menuPath)) {
+          filteredMenus.push(menu)
+        }
+      })
+      return filteredMenus
+    },
     getActiveIndex(keyChange) {
       if (keyChange) {
         this.keyChange = new Date().getTime()

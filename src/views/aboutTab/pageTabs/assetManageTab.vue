@@ -58,26 +58,34 @@ export default {
   },
   methods: {
     async getAssetTree() {
-      const res = await getAssetTreePort()
+      const params = {
+        assetSearch: this.currentIndex
+      }
+      const res = await getAssetTreePort(params)
       if (res && res.data && res.data.errorCode === 110000) {
         const info = res.data.list || []
         this.assetTreeDict = info
+        this.$refs.assetTreeRef.getTree({ currentNodeKey: null })
       }
     },
     // 更新tab
     changeTab(index) {
       if (index !== this.currentIndex) {
         this.currentIndex = index
+        this.getAssetTree()
+        this.clickTreeAll()
       }
     },
     nodeClick(data) {
       const params = {
+        assetSearch: this.currentIndex,
         assetTypeTree: data.id
       }
       this.$refs.assetTableRef.searchByAside(params)
     },
     clickTreeAll() {
       const params = {
+        assetSearch: this.currentIndex,
         assetTypeTree: ''
       }
       this.$refs.assetTableRef.searchByAside(params)

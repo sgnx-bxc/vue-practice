@@ -1,19 +1,28 @@
 <template>
   <header class="headerBlock">
     <div class="system-title" @click="goHome">THISISALOGO</div>
-    <div class="header-user" :title="userName">
-      <el-dropdown @command="handleCommand">
-        <span class="el-dropdown-link">
-          <i class="el-icon-user"></i>
-          {{ userName || '--' }}
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="1">账户信息</el-dropdown-item>
-          <el-dropdown-item command="2">修改密码</el-dropdown-item>
-          <el-dropdown-item command="3">退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+    <div class="header-right">
+      <!-- 态势感知大屏 -->
+      <div class="header-daping">
+        <el-button type="primary" size="small" @click="goScreen">
+          态势感知大屏
+        </el-button>
+      </div>
+      <div class="extract-info">当前角色：{{ roleName }}</div>
+      <div class="header-user" :title="userName">
+        <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link">
+            <i class="el-icon-user"></i>
+            {{ userName || '--' }}
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="1">账户信息</el-dropdown-item>
+            <el-dropdown-item command="2">修改密码</el-dropdown-item>
+            <el-dropdown-item command="3">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
     <!-- 修改信息 -->
     <addOrEditUserDialog ref="addOrEditUserDialogRef"></addOrEditUserDialog>
@@ -34,8 +43,6 @@ export default {
   data() {
     return {
       userName: '',
-      curTime: '',
-      timer: null,
       userId: null
     }
   },
@@ -97,7 +104,8 @@ export default {
     },
     goHome() {
       this.$router.replace(`/aboutEcharts`)
-    }
+    },
+    goScreen() {}
   }
 }
 </script>
@@ -126,17 +134,49 @@ export default {
     z-index: 9;
     cursor: pointer;
   }
-  .header-user {
+  .header-right {
     display: flex;
-    justify-content: center;
-    position: relative;
     align-items: center;
-    padding: 6px 10px;
-    z-index: 2;
-    .el-dropdown {
+    .header-daping {
+      .el-button--primary {
+        min-width: 80px;
+        color: #fff;
+        background: #2962ff;
+        border-color: #2962ff;
+        &:focus,
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+    .extract-info {
+      position: relative;
+      margin-left: 50px;
+      margin-right: 30px;
       color: #fff;
-      margin-left: 15px;
-      cursor: pointer;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -25px;
+        width: 2px;
+        height: 100%;
+        transform: scaleX(0.5);
+        background-color: #bdbdbd;
+      }
+    }
+    .header-user {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      align-items: center;
+      padding: 6px 10px;
+      z-index: 2;
+      .el-dropdown {
+        color: #fff;
+        margin-left: 15px;
+        cursor: pointer;
+      }
     }
   }
 }

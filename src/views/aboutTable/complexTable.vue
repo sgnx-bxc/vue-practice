@@ -14,7 +14,7 @@
       </div>
       <div class="assetFreq-leak">
         <div class="assetFreq-header">
-          <div class="header-left" title="漏洞资产占比">漏洞资产占比</div>
+          <div class="header-left" title="漏洞资产占比">TOP10漏洞资产占比</div>
         </div>
         <div class="assetFreq-main">
           <assetFreqTop10Chart

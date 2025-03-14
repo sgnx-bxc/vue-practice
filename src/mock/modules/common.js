@@ -55,7 +55,7 @@ export default [
             idStr: '17',
             create_time: 1648638133,
             phone: null,
-            roleName: '操作员',
+            roleName: '安全管理员',
             name: 'SecAdmin',
             description: null,
             userId: 17,
@@ -163,6 +163,23 @@ export default [
                   {
                     menuPath: '/aboutG6OrX6/editorX6',
                     menuName: '图编辑器X6'
+                  }
+                ]
+              },
+              {
+                menuName: '态势感知',
+                children: [
+                  {
+                    menuPath: '/situationAwareness/assetSituation',
+                    menuName: '资产态势'
+                  },
+                  {
+                    menuPath: '/situationAwareness/interAttackSituation',
+                    menuName: '内部攻击态势'
+                  },
+                  {
+                    menuPath: '/situationAwareness/exterAttackSituation',
+                    menuName: '外部攻击态势'
                   }
                 ]
               }

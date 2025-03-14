@@ -139,6 +139,7 @@ module.exports = {
       // 移除console.log
       minimizer: [
         new TerserPlugin({
+					parallel: 4, // 使用多进程并发运行以提高构建速度
           terserOptions: {
             output: {
               comments: false // 删除注释

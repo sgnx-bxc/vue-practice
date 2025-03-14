@@ -10,12 +10,6 @@ body {
   background-size: auto 100%;
 }
 
-/** 默认滚动条 非chrome的部分浏览器有效，如firefox有效 **/
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #c7c9cc #eaecef;
-}
-
 /** 默认滚动条 在chrome浏览器有效 **/
 // 整体部分
 ::-webkit-scrollbar {
@@ -32,13 +26,8 @@ body {
   border-radius: 10px;
   border-style: dashed;
   border-color: transparent;
-  border-width: 4px;
-  background-color: rgba(157, 165, 183, 0.4);
+  background-color: rgba(144, 147, 153, 0.5);
   background-clip: padding-box;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(157, 165, 183, 0.7);
-  border-width: 6px;
 }
 
 /** el-scrollbar滚动条 **/

@@ -29,22 +29,12 @@
     <!-- 2.时间查询内容 -->
     <div class="second-fixed">
       <div class="empty"></div>
-      <div class="time-box">
-        <div
-          class="box-select"
-          :class="{ isActive: currentIndex === 0 }"
-          @click="timeChange(0)"
-        >
-          近7天
-        </div>
-        <div
-          class="box-select"
-          :class="{ isActive: currentIndex === 1 }"
-          @click="timeChange(1)"
-        >
-          近30天
-        </div>
-      </div>
+      <timeRangeRadio
+        ref="timeRangeRadioRef"
+        :hasPicker="false"
+        :timeIndex.sync="timeIndex"
+        @timeRangeChange="timeRangeChange"
+      ></timeRangeRadio>
     </div>
     <!-- 3.仪表盘 -->
     <div class="allStat" :class="{ bigScreen: overResize }">
@@ -455,6 +445,7 @@
 
 <script>
 import installTimeChart from '@/views/aboutEcharts/dashboard/installTimeChart'
+import timeRangeRadio from '@/components/time/timeRangeRadio.vue'
 import alarmStatChart from '@/views/aboutEcharts/dashboard/alarmStatChart'
 import alarmEventType from '@/views/aboutEcharts/dashboard/alarmEventType'
 import alarmTrendChart from '@/views/aboutEcharts/dashboard/alarmTrendChart'
@@ -479,6 +470,7 @@ export default {
   name: 'dashboard',
   components: {
     installTimeChart,
+    timeRangeRadio,
     alarmStatChart,
     alarmEventType,
     alarmTrendChart,
@@ -500,7 +492,7 @@ export default {
       allInfo: {},
       haveData: false,
       platformInfo: {},
-      currentIndex: 0,
+      timeIndex: 1,
       assetStatistic: {},
       minitorAssetType: [
         {
@@ -597,6 +589,7 @@ export default {
     }
   },
   mounted() {
+    this.$refs.timeRangeRadioRef.initTimeRangeRadio()
     this.screenResize()
     window.addEventListener('resize', this.screenResize)
     this.getInstallInfo()
@@ -629,7 +622,7 @@ export default {
     },
     async getAllChartInfo(isCache) {
       const params = {
-        range: this.currentIndex === 0 ? 1 : 2
+        range: this.timeIndex
       }
       const res = await getAllChartInfoPort(params)
       if (res && res.data && res.data.errorCode === 110000) {
@@ -769,8 +762,7 @@ export default {
         this.haveData = true
       })
     },
-    timeChange(index) {
-      this.currentIndex = index
+    timeRangeChange() {
       this.getAllChartInfo()
     },
     appBtns(index) {
@@ -869,28 +861,10 @@ export default {
   }
   .second-fixed {
     width: 100%;
-    height: 34px;
+    height: 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .time-box {
-      display: flex;
-      align-items: center;
-      .box-select {
-        padding: 0 10px;
-        cursor: pointer;
-        color: #2d2f33;
-        &:first-child {
-          border-right: 1px solid #dcdfe6;
-        }
-        &.isActive {
-          color: #2985f7;
-        }
-        &:hover {
-          opacity: 0.85;
-        }
-      }
-    }
   }
   .allStat {
     width: 100%;
