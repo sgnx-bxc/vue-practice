@@ -1,3 +1,10 @@
+/**
+ * 需要登录后鉴权的，容器内部菜单
+ * name：缓存标识，也是组件名
+ * meta参数说明
+ * deadRoute：是否是不显示菜单的路由
+ * keepAlive：是否可加入到面包缓存表中
+ **/
 export default [
   {
     path: '/aboutEcharts',

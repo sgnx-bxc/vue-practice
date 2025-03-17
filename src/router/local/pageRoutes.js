@@ -1,22 +1,23 @@
 /**
  * 需要登录后鉴权的，脱离布局容器的组件页面
- * meta参数说明
- * activeId：对应父页面菜单id
- * name：菜单项或路由页面名称
+ * name：缓存标识，也是组件名
  **/
 export default [
   {
     path: '/situationAwareness/assetSituation',
-    component: () => import('@/views/situationAwareness/assetSituation.vue')
+    component: () => import('@/views/situationAwareness/assetSituation.vue'),
+    name: 'assetSituation'
   },
   {
     path: '/situationAwareness/interAttackSituation',
     component: () =>
-      import('@/views/situationAwareness/interAttackSituation.vue')
+      import('@/views/situationAwareness/interAttackSituation.vue'),
+    name: 'interAttackSituation'
   },
   {
     path: '/situationAwareness/exterAttackSituation',
     component: () =>
-      import('@/views/situationAwareness/exterAttackSituation.vue')
+      import('@/views/situationAwareness/exterAttackSituation.vue'),
+    name: 'exterAttackSituation'
   }
 ]

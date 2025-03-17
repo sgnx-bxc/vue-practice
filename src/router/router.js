@@ -140,6 +140,7 @@ function getHomeRouter(to, from, next) {
   const asyncRouter = getAsyncRouterRights(menusBack)
   const noneLayoutPageRoutes = getAsyncPageRouterRights(menusBack)
   store.commit('system/setAsyncRouter', asyncRouter)
+  store.commit('system/setNoneLayoutPageRoutes', noneLayoutPageRoutes)
   // 获取指定路径并解析出路径及参数
   const service = from.query.service || to.query.service || ''
   const serviceObj = urlToPathAndParams(service)
@@ -233,6 +234,7 @@ function getAsyncPageRouterRightsLoop(menuList, menusBack, newMenuList = []) {
         const obj = {
           path: menu.menuPath,
           component: needObj.component,
+          name: needObj.name,
           meta: {
             name: menu.menuName
           }

@@ -11,8 +11,10 @@ export default {
     clientHeightType: 0,
     // 取消请求的cancel列表
     axiosPromiseArr: [],
-    // 动态路由
+    // 异步路由
     asyncRouter: [],
+    // 独立路由
+    noneLayoutPageRoutes: [],
     // 全局loading对象
     loadingObj: null,
     // 是否全局loading
@@ -35,6 +37,9 @@ export default {
     },
     getAsyncRouter(state) {
       return state.asyncRouter
+    },
+    getNoneLayoutPageRoutes(state) {
+      return state.noneLayoutPageRoutes
     },
     getApiLoading(state) {
       return state.portLoading
@@ -70,6 +75,9 @@ export default {
     },
     setAsyncRouter(state, val) {
       state.asyncRouter = val
+    },
+    setNoneLayoutPageRoutes(state, val) {
+      state.noneLayoutPageRoutes = val
     },
     // 全局loading服务，开启loading
     startLoading(state) {
