@@ -203,6 +203,7 @@ function getAsyncRouterRightsLoop(menuList, menusBack, newMenuList = []) {
           meta: {
             name: menu.menuName,
             iconClass: menu.menuIcon,
+            deadRoute: needObj.meta.deadRoute,
             keepAlive: needObj.meta.keepAlive
           }
         }

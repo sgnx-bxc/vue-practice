@@ -61,25 +61,28 @@ export default {
         const allAsyncMenus = JSON.parse(JSON.stringify(allAsyncMenusOrigin))
         const rightList = JSON.parse(JSON.stringify(rightListOrigin))
         const rightPath = rightList.map((route) => route.path)
-        menuList = this.filterMenusByPaths(allAsyncMenus, rightPath)
+        menuList = this.filterMenusByPaths(allAsyncMenus, rightPath, rightList)
       }
+      console.log(menuList)
       return menuList
     },
     // 定义过滤函数
-    filterMenusByPaths(menus, paths) {
+    filterMenusByPaths(menus, paths, rightList) {
       let filteredMenus = []
       menus.forEach((menu) => {
+        const needObj = rightList.find(item => item.path === menu.menuPath)
         if (menu.children) {
-          menu.children = this.filterMenusByPaths(menu.children, paths)
+          menu.children = this.filterMenusByPaths(menu.children, paths, rightList)
           if (menu.children.length > 0) {
             filteredMenus.push(menu)
           }
-        } else if (paths.includes(menu.menuPath)) {
+        } else if (paths.includes(menu.menuPath) && !needObj.meta.deadRoute) {
           filteredMenus.push(menu)
         }
       })
       return filteredMenus
     },
+    // NNNN 可能有问题
     getActiveIndex(keyChange) {
       if (keyChange) {
         this.keyChange = new Date().getTime()
