@@ -63,16 +63,19 @@ export default {
         const rightPath = rightList.map((route) => route.path)
         menuList = this.filterMenusByPaths(allAsyncMenus, rightPath, rightList)
       }
-      console.log(menuList)
       return menuList
     },
     // 定义过滤函数
     filterMenusByPaths(menus, paths, rightList) {
       let filteredMenus = []
       menus.forEach((menu) => {
-        const needObj = rightList.find(item => item.path === menu.menuPath)
+        const needObj = rightList.find((item) => item.path === menu.menuPath)
         if (menu.children) {
-          menu.children = this.filterMenusByPaths(menu.children, paths, rightList)
+          menu.children = this.filterMenusByPaths(
+            menu.children,
+            paths,
+            rightList
+          )
           if (menu.children.length > 0) {
             filteredMenus.push(menu)
           }
@@ -82,7 +85,7 @@ export default {
       })
       return filteredMenus
     },
-    // NNNN 可能有问题
+    // 菜单高亮
     getActiveIndex(keyChange) {
       if (keyChange) {
         this.keyChange = new Date().getTime()
@@ -93,8 +96,9 @@ export default {
       )
       if (!findUnqiue) {
         this.gotoNonePage()
+      } else if (!findUnqiue.meta.deadRoute) {
+        this.menuActive = findUnqiue.path
       }
-      this.menuActive = findUnqiue.path
     },
     menuSelect(path) {
       this.$router.push(path)
