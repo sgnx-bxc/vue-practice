@@ -868,7 +868,7 @@ export default {
   }
   .allStat {
     width: 100%;
-    height: calc(100% - 146px - 34px);
+    height: calc(100% - 146px - 55px);
     overflow: auto;
     &.bigScreen {
       .commonStat {

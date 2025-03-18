@@ -105,7 +105,12 @@ export default {
     goHome() {
       this.$router.replace(`/aboutEcharts`)
     },
-    goScreen() {}
+    goScreen() {
+      const routeData = this.$router.resolve({
+        path: '/situationAwareness/assetSituation'
+      })
+      window.open(routeData.href, '_blank')
+    }
   }
 }
 </script>

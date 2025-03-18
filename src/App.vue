@@ -45,7 +45,7 @@ body,
   width: 100%;
   height: 100%;
   background: #fff;
-  overflow: auto;
+  overflow: hidden;
   padding: 0px 0px;
   &.maxWidthHeight {
     min-width: 1346px;

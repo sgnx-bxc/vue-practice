@@ -6,6 +6,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import getPageTitle from '@/utils/pageTitle'
 import Layout from '@/components/layout/index'
+import noneLayout from '@/components/noneLayout/index.vue'
 import localRoutes from './local'
 import { MessageBox } from 'element-ui'
 const PAGE403 = '/403'
@@ -159,7 +160,11 @@ function getHomeRouter(to, from, next) {
       component: Layout,
       children: homeChildren
     },
-    ...noneLayoutPageRoutes
+    {
+      path: '/noneIndex',
+      component: noneLayout,
+      children: noneLayoutPageRoutes
+    }
   ]
   router.addRoutes(homeRouter)
   // 判断下一跳
