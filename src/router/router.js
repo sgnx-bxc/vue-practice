@@ -195,20 +195,25 @@ function getAsyncRouterRights(menusBack) {
 function getAsyncRouterRightsLoop(menuList, menusBack, newMenuList = []) {
   menusBack.forEach((menu) => {
     if (!menu.children) {
-      const needObj = menuList.find((list) => list.path === menu.menuPath)
-      if (needObj) {
-        const obj = {
-          path: menu.menuPath,
-          component: needObj.component,
-          name: needObj.name,
-          meta: {
-            name: menu.menuName,
-            iconClass: menu.menuIcon,
-            deadRoute: needObj.meta.deadRoute,
-            keepAlive: needObj.meta.keepAlive
+      const needArr = menuList.filter(
+        (list) =>
+          list.path === menu.menuPath || list.meta.pPath === menu.menuPath
+      )
+      if (needArr && needArr.length > 0) {
+        needArr.forEach((needObj) => {
+          const obj = {
+            path: needObj.path,
+            component: needObj.component,
+            name: needObj.name,
+            meta: {
+              name: menu.menuName,
+              iconClass: menu.menuIcon,
+              deadRoute: needObj.meta.deadRoute,
+              keepAlive: needObj.meta.keepAlive
+            }
           }
-        }
-        newMenuList.push(obj)
+          newMenuList.push(obj)
+        })
       }
     } else {
       getAsyncRouterRightsLoop(menuList, menu.children, newMenuList)
@@ -229,17 +234,19 @@ function getAsyncPageRouterRights(menusBack) {
 function getAsyncPageRouterRightsLoop(menuList, menusBack, newMenuList = []) {
   menusBack.forEach((menu) => {
     if (!menu.children) {
-      const needObj = menuList.find((list) => list.path === menu.menuPath)
-      if (needObj) {
-        const obj = {
-          path: menu.menuPath,
-          component: needObj.component,
-          name: needObj.name,
-          meta: {
-            name: menu.menuName
+      const needArr = menuList.filter((list) => list.path === menu.menuPath)
+      if (needArr && needArr.length > 0) {
+        needArr.forEach((needObj) => {
+          const obj = {
+            path: needObj.path,
+            component: needObj.component,
+            name: needObj.name,
+            meta: {
+              name: menu.menuName
+            }
           }
-        }
-        newMenuList.push(obj)
+          newMenuList.push(obj)
+        })
       }
     } else {
       getAsyncPageRouterRightsLoop(menuList, menu.children, newMenuList)
