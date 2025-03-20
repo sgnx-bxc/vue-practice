@@ -17,15 +17,12 @@
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">账户信息</el-dropdown-item>
             <el-dropdown-item command="2">修改密码</el-dropdown-item>
             <el-dropdown-item command="3">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
     </div>
-    <!-- 修改信息 -->
-    <addOrEditUserDialog ref="addOrEditUserDialogRef"></addOrEditUserDialog>
     <!-- 修改密码 -->
     <modPassword ref="modPasswordRef" @logout="logout"></modPassword>
   </header>
@@ -33,13 +30,11 @@
 
 <script>
 // 页面头部
-import addOrEditUserDialog from '@/components/dialog/addOrEditUserDialog'
 import modPassword from '@/components/dialog/modPassword.vue'
 import { logOut } from '@/api/request/common'
-import { getUsers } from '@/api/request/system'
 let self = null
 export default {
-  components: { addOrEditUserDialog, modPassword },
+  components: { modPassword },
   data() {
     return {
       userName: '',
@@ -63,9 +58,7 @@ export default {
   methods: {
     // 用户下拉列表
     handleCommand(command) {
-      if (command === '1') {
-        this.getUserInfo()
-      } else if (command === '2') {
+      if (command === '2') {
         this.$refs.modPasswordRef.handleOpen()
       } else if (command === '3') {
         // 退出登录
@@ -74,19 +67,6 @@ export default {
         }).then(() => {
           self.logout()
         })
-      }
-    },
-    async getUserInfo() {
-      const params = {
-        name: this.userName
-      }
-      const res = await getUsers(params)
-      if (res && res.data && res.data.errorCode === 110000) {
-        const info = res.data.list[0] || {}
-        const type = 'modify'
-        this.$refs.addOrEditUserDialogRef.handleOpen(type, info)
-      } else {
-        this.$message.error(res.data.msg)
       }
     },
     // 请求登出接口

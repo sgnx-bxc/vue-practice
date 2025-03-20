@@ -21,6 +21,26 @@ export const getUrlInfoPort = (params) => {
   return getdata('POST', `/api/ismc/token`, params)
 }
 
+// 获取安全问题
+export const getQuesListPort = (params) => {
+  return getdata('POST', `/api/user/question/list`, params)
+}
+
+// 登录时修改默认密码
+export const updateUserDefaultPwd = (params) => {
+  return getdata('POST', `/api/user/init`, params)
+}
+
+// 首次登录修改默认密码
+export const updateUserPwd = (params) => {
+  return getdata('POST', `/api/user/init`, params)
+}
+
+// 修改密码
+export const getModPasswordPort = (params) => {
+  return getdata('POST', `/api/user/password/edit`, params)
+}
+
 // 退出登录
 export const logOut = (params) => {
   return getdata('POST', `/api/user/logout`, params)

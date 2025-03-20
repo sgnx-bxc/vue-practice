@@ -18,6 +18,7 @@ const sysConfig = {
       postuserlogin: false, // 用户登录
       postismctoken: false, // 单点登录获取用户信息
       postuserrole: false, // 用户权限
+      postuserquestionlist: false, // 获取安全问题
       postuserlogout: false, // 退出登录
       /** 工作台 */
       postboardsysInfo: false, // 上方总览信息统计
@@ -25,10 +26,6 @@ const sysConfig = {
       /** Grid布局 */
       postgridallCard: false, // 所有卡片
       postgridlayout: false, // 卡片布局
-      /** 系统管理 */
-      postuserlist: false, // 账号管理-查询用户
-      postrolelist: false, // 账号管理-查询角色
-      postquestionlist: false, // 账号管理-获取安全问题
       /** 表格相关 */
       posttableblackwhitelist: false, // 基础表格-DNS黑名单列表
       posttableassetTypeDict: false, // 基础表格-资产类别获取
@@ -43,6 +40,9 @@ const sysConfig = {
       /** tab相关 */
       posttabsassetManageTree: false, // 页面级tab-资产管理-左侧资产树
       posttabsassetManageList: false, // 页面级tab-资产管理-右侧资产列表
+      posttabsuserManageList: false, // 页面级tab-用户管理-用户管理列表
+      posttabsroleDict: false, // 页面级tab-用户管理-角色查询
+      posttabsaccountOriginData: false, // 页面级tab-用户管理-编辑用户原数据
       /* 不模拟的接口 */
       getdefaultport: false
     }

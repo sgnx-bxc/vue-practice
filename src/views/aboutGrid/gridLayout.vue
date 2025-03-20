@@ -185,8 +185,10 @@ export default {
     // 设置卡片高度
     resize() {
       // 每页两行卡片
-      const height = document.getElementById('workbench').offsetHeight - 10
-      this.cardHeight = height / 2
+      if (document.getElementById('workbench')) {
+        const height = document.getElementById('workbench').offsetHeight - 10
+        this.cardHeight = height / 2
+      }
     },
     async getGridLayout() {
       this.layout = []

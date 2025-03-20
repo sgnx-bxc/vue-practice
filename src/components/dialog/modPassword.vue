@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { getModPasswordPort } from '@/api/request/system'
+import { getModPasswordPort } from '@/api/request/common'
 import { encryptedData } from '@/utils/jsencrypt'
 
 export default {

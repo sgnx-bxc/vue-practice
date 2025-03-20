@@ -351,5 +351,141 @@ export default [
         ]
       }
     }
+  },
+  // 页面级tab-用户管理-用户管理列表
+  {
+    name: 'posttabsuserManageList',
+    url: 'posttabsuserManageList',
+    type: 'post',
+    response: (option) => {
+      return {
+        success: true,
+        msg: 'success.',
+        errorCode: 110000,
+        total: 4,
+        pageSize: 1,
+        pageNum: 1,
+        pages: 1,
+        list: [
+          {
+            userId: 'userId1',
+            name: 'name1',
+            roleName: 'roleName1',
+            email: 'email1',
+            phone: 'phone1',
+            status: 0,
+            createTime: 'createTime1',
+            modifyTime: 'modifyTime1'
+          },
+          {
+            userId: 'userId2',
+            name: 'name2',
+            roleName: 'roleName2',
+            email: 'email2',
+            phone: 'phone2',
+            status: 1,
+            createTime: 'createTime2',
+            modifyTime: 'modifyTime2'
+          },
+          {
+            userId: 'userId3',
+            name: 'name3',
+            roleName: 'roleName3',
+            email: 'email3',
+            phone: 'phone3',
+            status: 1,
+            createTime: 'createTime3',
+            modifyTime: 'modifyTime3'
+          },
+          {
+            userId: 'userId4',
+            name: 'name4',
+            roleName: 'roleName4',
+            email: 'email4',
+            phone: 'phone4',
+            status: 0,
+            createTime: 'createTime4',
+            modifyTime: 'modifyTime4'
+          }
+        ]
+      }
+    }
+  },
+  // 页面级tab-用户管理-角色查询
+  {
+    name: 'posttabsroleDict',
+    url: 'posttabsroleDict',
+    type: 'post',
+    response: (option) => {
+      return {
+        success: true,
+        msg: 'success.',
+        errorCode: 110000,
+        total: 4,
+        pageSize: 1,
+        pageNum: 1,
+        pages: 1,
+        list: [
+          {
+            roleId: 1,
+            roleName: 'roleName1',
+            roleDesc: 'roleDesc1',
+            createTime: 'createTime1',
+            modifyTime: 'modifyTim1e1'
+          },
+          {
+            roleId: 2,
+            roleName: 'roleName2',
+            roleDesc: 'roleDesc2',
+            createTime: 'createTime2',
+            modifyTime: 'modifyTim1e2'
+          },
+          {
+            roleId: 3,
+            roleName: 'roleName3',
+            roleDesc: 'roleDesc3',
+            createTime: 'createTime3',
+            modifyTime: 'modifyTim1e3'
+          },
+          {
+            roleId: 4,
+            roleName: 'roleName4',
+            roleDesc: 'roleDesc4',
+            createTime: 'createTime4',
+            modifyTime: 'modifyTim1e4'
+          }
+        ]
+      }
+    }
+  },
+  // 页面级tab-用户管理-编辑用户原数据
+  {
+    name: 'posttabsaccountOriginData',
+    url: 'posttabsaccountOriginData',
+    type: 'post',
+    response: (option) => {
+      return {
+        success: true,
+        msg: 'success.',
+        errorCode: 110000,
+        total: 4,
+        pageSize: 1,
+        pageNum: 1,
+        pages: 1,
+        list: [
+          {
+            userId: 'userId1',
+            name: 'name1',
+            roleId: 1,
+            roleName: 'roleName1',
+            email: '123@123.com',
+            phone: 13111111111,
+            status: 1,
+            createTime: 'createTime1',
+            modifyTime: 'modifyTime1'
+          }
+        ]
+      }
+    }
   }
 ]

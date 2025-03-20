@@ -567,6 +567,8 @@ export default {
             allowIpOrIpRange: info.allowIpOrIpRange,
             remark: info.remark
           }
+        } else {
+          this.$message.error(res.data.msg || '获取原数据失败')
         }
       } catch (e) {
         console.error(e)
@@ -609,7 +611,6 @@ export default {
         this.loading = true
         const params = this.getParams()
         params.id = this.originTableRow.id
-        console.log(params)
         const res = await editBlackListPort(params)
         if (res && res.data && res.data.errorCode === 110000) {
           this.$message.success('编辑成功')

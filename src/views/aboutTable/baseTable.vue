@@ -18,12 +18,12 @@
         </el-tooltip>
       </div>
       <div class="right">
-        <el-button size="small" type="primary" @click="addHandle">
-          新增
-        </el-button>
+        <el-button size="small" type="primary" @click="addHandle"
+          >新增</el-button
+        >
         <el-button size="small" type="primary" @click="batchDelete"
-          >批量删除
-        </el-button>
+          >批量删除</el-button
+        >
       </div>
     </div>
     <tableMain ref="tableRef" :tableFormRef="$refs.tableformRef" rowKey="id">
@@ -318,7 +318,7 @@ export default {
       const res = await updateListStatusPort()
       if (res && res.data && res.data.errorCode === 110000) {
         this.$message.success('状态修改成功')
-        this.getDatas()
+        this.getDatas(false)
       } else {
         this.$message.error(res.data.msg)
       }

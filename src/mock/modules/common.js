@@ -59,7 +59,8 @@ export default [
             name: 'SecAdmin',
             description: null,
             userId: 17,
-            status: '1'
+            roleId: 78,
+            status: 1
           }
         ]
       }
@@ -81,10 +82,10 @@ export default [
         pages: 0,
         list: [
           {
-            id: '17',
+            id: 17,
             name: 'SecAdmin',
-            userId: '17',
-            roleId: '78',
+            userId: 17,
+            roleId: 78,
             roleName: '安全管理员',
             permissions: [],
             menus: [
@@ -245,9 +246,28 @@ export default [
         list: [
           {
             name: 'secAdmin',
+            roleId: 78,
             userId: 22
           }
         ]
+      }
+    }
+  },
+  // 获取安全问题
+  {
+    name: 'postuserquestionlist',
+    url: 'postuserquestionlist',
+    type: 'post',
+    response: (option) => {
+      return {
+        success: true,
+        msg: 'success.',
+        errorCode: 110000,
+        total: 4,
+        pageSize: 1,
+        pageNum: 1,
+        pages: 1,
+        list: [{ name: 'Who are you?', id: 1 }]
       }
     }
   },

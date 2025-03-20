@@ -4,7 +4,7 @@
     class="default-dialog-style"
     width="520px"
     title="修改密码"
-    v-loading="saveloading"
+    v-loading="loading"
     :visible.sync="dialogShow"
     v-if="dialogShow"
     :close-on-click-modal="false"
@@ -79,7 +79,7 @@ import {
   updateUserPwd,
   updateUserDefaultPwd,
   getQuesListPort
-} from '@/api/request/system'
+} from '@/api/request/common'
 import { encryptedData } from '@/utils/jsencrypt'
 export default {
   name: 'editPassword',
@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       secQuestionIdSel: [],
-      saveloading: false,
+      loading: false,
       dialogShow: false,
       resetInfo: {
         userName: '',
@@ -188,19 +188,25 @@ export default {
       this.getQuesList()
     },
     async getQuesList() {
-      this.secQuestionIdSel = []
-      const res = await getQuesListPort()
-      if (res && res.data && res.data.errorCode === 110000) {
-        const info = res.data.list
-        info.forEach((item) => {
-          let obj = {
-            label: item.name,
-            value: item.id
-          }
-          this.secQuestionIdSel.push(obj)
-        })
-      } else {
-        this.$message.error(res.data.msg)
+      try {
+        this.secQuestionIdSel = []
+        this.loading = true
+        const res = await getQuesListPort()
+        if (res && res.data && res.data.errorCode === 110000) {
+          const info = res.data.list
+          info.forEach((item) => {
+            let obj = {
+              label: item.name,
+              value: item.id
+            }
+            this.secQuestionIdSel.push(obj)
+          })
+        } else {
+          this.$message.error(res.data.msg)
+        }
+      } catch (e) {
+      } finally {
+        this.loading = false
       }
     },
     // 提交事件
@@ -210,7 +216,7 @@ export default {
     // 请求修改密码接口
     async restPwdValid(valid) {
       if (valid) {
-        this.saveloading = true
+        this.loading = true
         let password = this.resetInfo.newPassWord1
         let cfpassword = this.resetInfo.newPassWord2
         password = password || ''
@@ -242,17 +248,17 @@ export default {
           const ret = await url(params)
           if (ret.data.errorCode !== 110000) {
             this.$message.error(ret.data.msg)
-            this.saveloading = false
+            this.loading = false
           } else {
             // 修改成功
             this.resetOk = true
             this.$message.success(msg)
             this.closeEvent(this.resetOk)
-            this.saveloading = false
             this.dialogShow = false
           }
         } catch (e) {
-          this.saveloading = false
+        } finally {
+          this.loading = false
         }
       }
     },

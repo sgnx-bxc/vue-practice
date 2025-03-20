@@ -5,7 +5,14 @@ import { Notification } from 'element-ui'
 const RightsUrl = '/customer-center/team/role/user' // 权限接口
 
 let requestCount = 0
-const noLoad = ['/api/csearchTable/blackListAdd']
+const noLoad = [
+  '/api/table/blackListInfo',
+  '/api/table/blackListAdd',
+  '/api/table/blackListEdit',
+  '/api/tabs/accountOriginData',
+  '/api/user/addAccount',
+  '/api/tabs/editAccount'
+]
 
 // 创建axios实例
 const sysConfig = window.sysConfig || {}
