@@ -3,6 +3,8 @@ const sysConfig = {
   isLocal: true,
   // 网关接口前缀
   urlPrefix: '/api', // 统一接口前缀
+  // 配置websocket连接的启停【默认true】
+  openWebsocket: false,
   // 路由跳转时是否取消所有pending中的请求【默认为true】
   requestCancelBeforeRoute: true,
   // 接口请求超时时间【默认120，单位秒】

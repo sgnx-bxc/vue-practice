@@ -1,17 +1,18 @@
 import Heartbeat from './heartbeat.js'
-import db from '@/utils/webStorage'
+import store from '@/store'
 import moment from 'moment'
+
 function ThisSocket() {
   const sysConfig = window.sysConfig || {}
   const isOpen = sysConfig.openWebsocket
-  const Socket = function() {
+  const Socket = function () {
     const self = this
     const websocketHost = window.location.host
     this.callbacks = {}
     let websocket = null
     let heart = null
 
-    Socket.prototype.connect = function(host) {
+    Socket.prototype.connect = function (host) {
       if ('WebSocket' in window) {
         if (websocket == null) {
           try {
@@ -27,11 +28,11 @@ function ThisSocket() {
       } else {
         console.log('Error: WebSocket is not supported by this browser.')
       }
-      websocket.onopen = function(event) {
+      websocket.onopen = function (event) {
         console.log('Info: WebSocket connection opened.')
         heart.start()
       }
-      websocket.onclose = function(event) {
+      websocket.onclose = function (event) {
         console.log('Info: WebSocket closed.')
         heart.stop()
         websocket = null
@@ -39,7 +40,7 @@ function ThisSocket() {
         console.log('Info: WebSocket will be reconnect')
         self.connect(host)
       }
-      websocket.onmessage = function(event) {
+      websocket.onmessage = function (event) {
         heart.serverheart()
         if (event.data === 'heartbeat') {
           return
@@ -66,7 +67,7 @@ function ThisSocket() {
             if (event.data instanceof Blob) {
               let headContent = event.data.slice(0, 7)
               let reader = new FileReader()
-              reader.onload = function() {
+              reader.onload = function () {
                 let head = reader.result
                 let url = URL.createObjectURL(
                   event.data.slice(7, event.data.size)
@@ -87,26 +88,25 @@ function ThisSocket() {
         }
       }
     }
-    Socket.prototype.init = function() {
-      const token = db.localGet('USER_TOKEN', '')
-      const teamId = db.get('TEAM_ID', '')
-      if (isOpen && token !== '' && teamId !== '') {
+    Socket.prototype.init = function () {
+      const token = store.state.account.token
+      if (isOpen && token) {
         let protocolType = ''
         if (window.location.protocol === 'http:') {
           protocolType = 'ws'
         } else {
           protocolType = 'wss'
         }
-        const connectUrl = `${protocolType}://${websocketHost}/websocket?teamId=${teamId}&token=${token}`
+        const connectUrl = `${protocolType}://${websocketHost}/websocket?token=${token}`
         Socket.prototype.connect(connectUrl)
       }
     }
-    Socket.prototype.clear = function() {
+    Socket.prototype.clear = function () {
       if (websocket) {
         websocket.close()
       }
     }
-    Socket.prototype.addCallback = function(type, func, name) {
+    Socket.prototype.addCallback = function (type, func, name) {
       let samefunc = false
       const callbacksList = this.callbacks[type] || []
       if (callbacksList.length === 0) {
@@ -122,7 +122,7 @@ function ThisSocket() {
         this.callbacks[type].push({ func, name })
       }
     }
-    Socket.prototype.removeCallback = function(type, func, name) {
+    Socket.prototype.removeCallback = function (type, func, name) {
       if (this.callbacks[type]) {
         let index = -1
         const callbacksList = this.callbacks[type] || []

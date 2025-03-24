@@ -1,5 +1,5 @@
 <template>
-  <div class="common-editor">
+  <div class="codeMirrorEditor-page" :style="{ height: height + 'px' }">
     <textarea ref="textarea" v-model="value"></textarea>
   </div>
 </template>
@@ -9,6 +9,7 @@ import { JSHINT } from 'jshint'
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/blackboard.css'
+import 'codemirror/theme/eclipse.css'
 // 代码语言
 import 'codemirror/mode/javascript/javascript'
 // 代码检查
@@ -34,11 +35,15 @@ import 'codemirror/addon/fold/comment-fold'
 import 'codemirror/addon/fold/xml-fold'
 
 export default {
-  name: 'codeEditor',
+  name: 'codeMirrorEditor',
   props: {
     value: {
       type: String,
       default: ''
+    },
+    height: {
+      type: Number,
+      default: 350
     }
   },
   data() {
@@ -88,23 +93,16 @@ export default {
       }
     }
   },
-  mounted() {
-    window.JSHINT = JSHINT
-    // 初始化
-    this.initialize()
-  },
   methods: {
     // 初始化
     initialize(coderConfig = {}) {
+      window.JSHINT = JSHINT
       const config = {
-        ...coderConfig,
-        ...this.coderOptions
+        ...this.coderOptions,
+        ...coderConfig
       }
       // 初始化编辑器实例，传入需要被实例化的文本域对象和默认配置
-      this.coder = CodeMirror.fromTextArea(
-        this.$refs.textarea,
-        config
-      )
+      this.coder = CodeMirror.fromTextArea(this.$refs.textarea, config)
       this.coder.on('inputRead', () => {
         this.coder.showHint()
       })
@@ -118,6 +116,9 @@ export default {
       this.coder.on('change', (coder) => {
         this.code = coder.getValue()
         this.$emit('input', this.code)
+      })
+      this.coder.on('blur', () => {
+        this.$emit('blur') // 新增blur事件
       })
     },
     setCodeContent(val) {
@@ -133,7 +134,7 @@ export default {
 }
 </script>
 <style lang="less">
-.common-editor {
+.codeMirrorEditor-page {
   width: 100%;
   height: 100%;
   .CodeMirror {

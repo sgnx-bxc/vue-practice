@@ -32,6 +32,12 @@ module.exports = {
         pathRewrite: {
           '^/api2/': '/'
         }
+      },
+      '/websocket': {
+        target: 'http://192.168.101.207:3001',
+        ws: true,
+        secure: false,
+        changeOrigin: true
       }
     }
   },
@@ -139,7 +145,7 @@ module.exports = {
       // 移除console.log
       minimizer: [
         new TerserPlugin({
-					parallel: 4, // 使用多进程并发运行以提高构建速度
+          parallel: 4, // 使用多进程并发运行以提高构建速度
           terserOptions: {
             output: {
               comments: false // 删除注释

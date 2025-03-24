@@ -1,5 +1,5 @@
 <template>
-  <div class="roleManageTab-page">roleManageTab</div>
+  <div class="roleManageTab-page"></div>
 </template>
 
 <script>

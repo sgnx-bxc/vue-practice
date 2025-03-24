@@ -8,6 +8,7 @@ import getPageTitle from '@/utils/pageTitle'
 import Layout from '@/components/layout/index'
 import noneLayout from '@/components/noneLayout/index.vue'
 import localRoutes from './local'
+import ws from '@/utils/websocket/websocket'
 import { MessageBox } from 'element-ui'
 const PAGE403 = '/403'
 const PAGE404 = '/404'
@@ -169,14 +170,21 @@ function getHomeRouter(to, from, next) {
   router.addRoutes(homeRouter)
   // 判断下一跳
   if (checkHasRoute(to.path) && to.path !== '/') {
+    // 建立websocket连接
+    ws.init()
     // 刷新时进入刷新前的页面
     next({
       ...to,
       replace: true
     })
   } else if (checkHasRoute(serviceObj.path)) {
+    // 建立websocket连接
+    ws.init()
+    // 登录后跳转指定路径路由，包含参数
     next({ path: serviceObj.path, query: serviceObj.params, replace: true })
   } else if (asyncRouter.length > 0) {
+    // 建立websocket连接
+    ws.init()
     const pRoute = asyncRouter[0]
     next({
       path: pRoute.path,

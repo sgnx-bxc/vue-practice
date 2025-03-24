@@ -1,5 +1,7 @@
 <template>
   <div class="dashboard-page">
+    <!-- 0.弹幕 -->
+    <div class="danmu-container"></div>
     <!-- 1.最上层固定内容 -->
     <div class="first-fixed">
       <div class="fixed-over-left">
@@ -28,7 +30,18 @@
     </div>
     <!-- 2.时间查询内容 -->
     <div class="second-fixed">
-      <div class="empty"></div>
+      <div class="switch-row">
+        <el-switch
+          v-model="isOpenBarrage"
+          active-color="#5587FF"
+          inactive-color="#C0C4CC"
+          :active-value="1"
+          :inactive-value="0"
+          @change="socketHandle"
+        ></el-switch>
+        <div class="startBtn" v-if="isOpenBarrage === 1">告警弹幕</div>
+        <div class="stopBtn" v-else>告警弹幕</div>
+      </div>
       <timeRangeRadio
         ref="timeRangeRadioRef"
         :hasPicker="false"
@@ -488,6 +501,8 @@ export default {
   },
   data() {
     return {
+      isOpenBarrage: 0,
+      timer: null,
       overResize: false,
       allInfo: {},
       haveData: false,
@@ -595,7 +610,89 @@ export default {
     this.getInstallInfo()
     this.getAllChartInfo()
   },
+  beforeDestroy() {
+    this.$ws.removeCallback('1000', this.pushAlarmData, 'topo')
+    this.timer && clearTimeout(this.timer)
+    this.timer = null
+  },
   methods: {
+    // websocket开始接收type为1000的数据
+    socketHandle(item) {
+      const { openWebsocket } = window.sysConfig || {}
+      if (openWebsocket) {
+        if (item === 1) {
+          this.$ws.addCallback('1000', this.pushAlarmData, 'topo')
+        } else {
+          this.$ws.removeCallback('1000', this.pushAlarmData, 'topo')
+        }
+      } else {
+        if (item === 1) {
+          // 前端模拟websocket效果
+          this.mockSocket()
+        } else {
+          this.timer && clearTimeout(this.timer)
+          this.timer = null
+        }
+      }
+    },
+    mockSocket() {
+      if (this.timer) return // 如果计时器已经存在，则直接返回
+      const sendMessage = () => {
+        const randomInt = Math.floor(Math.random() * (4000 - 200 + 1)) + 200
+        const randomInt2 = Math.floor(Math.random() * 11)
+        const arr = [
+          '666，你是真的菜',
+          'OHHHHHHHHHHHHHHHHHH~',
+          '家人们，谁懂啊，今天出门遇见了个虾头男~~',
+          '笑死我了666',
+          '6着干嘛，扣愣啊',
+          '你也不想我们的事被你老公知道吧',
+          '为人民企业家打call',
+          '你不干，有的是人干',
+          '3秒钟也很厉害了',
+          '姐妹们，老公不够持久怎么办'
+        ]
+        const obj = {
+          type: '1000',
+          content: arr[randomInt2]
+        }
+        this.pushAlarmData(obj)
+        this.timer = setTimeout(sendMessage, randomInt)
+      }
+      sendMessage()
+    },
+    pushAlarmData(params) {
+      const paramsObj = JSON.parse(JSON.stringify(params))
+      const newDanmu = paramsObj.content
+      if (newDanmu) {
+        this.createDanmaku(newDanmu)
+      }
+    },
+    createDanmaku(newDanmu) {
+      const danmuContainer = document.querySelector('.danmu-container')
+      const danmuDom = document.createElement('div')
+      const randomNum = Math.floor(Math.random() * 31) // 生成 0 到 100 的整数
+      danmuDom.className = 'danmuDom-item'
+      danmuDom.style.backgroundColor = 'rgba(137, 148, 253, 1)'
+      danmuDom.style.position = 'absolute'
+      danmuDom.style.top = `${randomNum}%`
+      danmuDom.style.right = '-360px'
+      danmuDom.style.zIndex = 99
+      danmuDom.style.height = '30px'
+      danmuDom.style.borderRadius = '15px'
+      danmuDom.style.color = '#fff'
+      danmuDom.style.lineHeight = '30px'
+      danmuDom.style.padding = '0 12px'
+      danmuDom.style.width = 'max-content'
+      danmuDom.style.maxWidth = '360px'
+      danmuDom.textContent = newDanmu
+      danmuContainer.appendChild(danmuDom)
+      // 监听动画结束事件
+      danmuDom.addEventListener('animationend', () => {
+        // 动画结束后移除元素
+        danmuContainer.removeChild(danmuDom)
+      })
+    },
     screenResize() {
       const allStatDom = document.querySelector('.allStat')
       if (allStatDom && allStatDom.clientHeight > 1196) {
@@ -786,6 +883,7 @@ export default {
 
 <style lang="less">
 .dashboard-page {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -865,6 +963,18 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .startBtn {
+        margin-left: 12px;
+        color: #29b641;
+      }
+      .stopBtn {
+        margin-left: 12px;
+      }
+    }
   }
   .allStat {
     width: 100%;
@@ -1425,6 +1535,18 @@ export default {
       .flowStatistic {
         height: calc(100% - 56px - 20px);
       }
+    }
+  }
+  .danmuDom-item {
+    animation: barragego 13s linear;
+    animation-iteration-count: 1;
+  }
+  @keyframes barragego {
+    from {
+      right: -360px;
+    }
+    to {
+      right: 100%;
     }
   }
 }

@@ -147,3 +147,13 @@ export function addVal2Arr(array, newItem, key = 'id') {
     : array.includes(newItem)
   return exists ? [...array] : [...array, newItem]
 }
+
+// 生成随机整数
+export function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+// 生成随机浮点数
+export function getRandomFloat(min, max) {
+  return Math.random() * (max - min) + min
+}

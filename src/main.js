@@ -19,6 +19,7 @@ import '@/style/common.less'
 import '@/style/fonts.less'
 import '@/style/skin/default.less'
 // 自定义项的全局引入
+import socket from '@/utils/websocket/websocket'
 import db from '@/utils/webStorage'
 import '@/utils/vueBus'
 import '@/utils/directive/install'
@@ -39,6 +40,8 @@ const init = () => {
   Vue.use(ElementUI)
   // 挂载echarts
   Vue.prototype.$echarts = echarts
+  // 挂载websocket
+  Vue.prototype.$ws = socket
   // 挂载G6
   Vue.prototype.$g6 = G6
   // 挂载webStorage

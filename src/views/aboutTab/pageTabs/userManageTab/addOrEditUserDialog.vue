@@ -4,7 +4,7 @@
       v-dialogDrag
       class="default-dialog-style"
       v-loading="loading"
-      width="520px"
+      width="768px"
       :title="title"
       v-if="visible"
       :visible.sync="visible"
@@ -79,6 +79,17 @@
             <div class="stopBtn" v-else>停用</div>
           </div>
         </el-form-item>
+        <el-form-item label="POC（JavaScript）" prop="poc">
+          <codeMirrorEditor
+            ref="codeMirrorEditorRef"
+            v-model="formData.poc"
+            @blur="checkPocRule"
+            @input="checkPocRule"
+          ></codeMirrorEditor>
+        </el-form-item>
+        <el-form-item label="标记介绍" prop="introduce">
+          <tiptapEditor ref="tiptapEditorRef"></tiptapEditor>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button size="small" @click="handleClose">取消</el-button>
@@ -93,6 +104,8 @@
 <script>
 import { checkEmail, checkMobile } from '@/utils/validateUtils'
 import { encryptedData } from '@/utils/jsencrypt'
+import codeMirrorEditor from '@/components/editor/codeMirrorEditor.vue'
+import tiptapEditor from '@/components/editor/tiptapEditor.vue'
 import {
   getOriginAccountInfoPort,
   addAccountPort,
@@ -101,6 +114,7 @@ import {
 
 export default {
   name: 'addOrEditUserDialog',
+  components: { codeMirrorEditor, tiptapEditor },
   data() {
     return {
       loading: false,
@@ -115,7 +129,8 @@ export default {
         email: '',
         phone: '',
         roleId: '',
-        status: 1
+        status: 1,
+        poc: ''
       },
       rules: {
         userName: [
@@ -148,6 +163,13 @@ export default {
             trigger: ['blur', 'change']
           },
           { validator: this.checkMobileRule, trigger: ['blur', 'change'] }
+        ],
+        poc: [
+          {
+            required: true,
+            message: '请输入POC',
+            trigger: ['blur', 'change']
+          }
         ]
       }
     }
@@ -174,6 +196,9 @@ export default {
         callback(new Error('请输入正确的手机号'))
       }
     },
+    checkPocRule() {
+      this.$refs.dialogForm.validateField('poc')
+    },
     handleOpen(params) {
       this.visible = true
       this.type = params.type
@@ -185,6 +210,9 @@ export default {
         this.originTableRow = params.dataRow
         this.getOriginAccountInfo()
       }
+      this.$nextTick(() => {
+        this.$refs.codeMirrorEditorRef.initialize({ theme: 'eclipse' })
+      })
     },
     async getOriginAccountInfo() {
       try {
@@ -227,6 +255,7 @@ export default {
       try {
         this.loading = true
         const params = this.getParams()
+        debugger
         const res = await addAccountPort(params)
         if (res && res.data && res.data.errorCode === 110000) {
           this.$message.success('新增用户成功')
@@ -271,7 +300,8 @@ export default {
         email: noReactionForm.email,
         phone: noReactionForm.phone,
         roleId: noReactionForm.roleId,
-        status: noReactionForm.status
+        status: noReactionForm.status,
+        poc: noReactionForm.poc
       }
       return obj
     },
@@ -304,6 +334,11 @@ export default {
     .stopBtn {
       margin-left: 12px;
     }
+  }
+  .codeMirrorEditor-page {
+    border-radius: 4px;
+    margin-top: 3px;
+    border: 1px solid #dcdfe6;
   }
 }
 </style>
