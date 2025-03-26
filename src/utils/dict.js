@@ -480,7 +480,19 @@ const allDict = {
   ipWayDict: [
     { label: 'IP', value: 1 },
     { label: 'IP段', value: 2 }
-  ]
+  ],
+  // 大屏路由字典
+  situationTypeDict: {
+    0: {
+      component: 'assetsSituation'
+    },
+    1: {
+      component: 'externalThreats'
+    },
+    2: {
+      component: 'internalThreats'
+    }
+  }
 }
 
 // 字典表数组字段转换

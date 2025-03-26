@@ -12,6 +12,7 @@ import 'echarts-wordcloud'
 import 'echarts-liquidfill'
 import 'zrender/lib/svg/svg'
 import G6 from '@antv/g6'
+import animate from 'animate.css'
 // 样式
 import 'normalize.css'
 import '@/style/animate.less'
@@ -28,16 +29,20 @@ import { getIsMock } from '@/mock/index.js'
 import chartTool from '@/components/chart/chartTool'
 import g6ChartTool from '@/components/chart/g6ChartTool.vue'
 import fecursiveFlex from '@/components/flexboard/FecursiveFlex'
+import cardTitle from '@/components/noneLayout/largeScreen/components/cardTitle.vue'
 
 const init = () => {
   // 注册全局组件
   Vue.component('ChartTool', chartTool)
   Vue.component('G6ChartTool', g6ChartTool)
   Vue.component('FecursiveFlex', fecursiveFlex)
+  Vue.component('CardTitle', cardTitle)
   // 为false阻止vue在启动时生成生产提示
   Vue.config.productionTip = false
   // 挂载
   Vue.use(ElementUI)
+  // 挂载
+  Vue.use(animate)
   // 挂载echarts
   Vue.prototype.$echarts = echarts
   // 挂载websocket

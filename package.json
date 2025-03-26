@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@antv/g6": "^4.8.21",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "codemirror": "^5.65.18",
     "core-js": "^2.6.5",

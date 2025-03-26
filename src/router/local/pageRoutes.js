@@ -6,18 +6,27 @@ export default [
   {
     path: '/situationAwareness/assetSituation',
     component: () => import('@/views/situationAwareness/assetSituation.vue'),
-    name: 'assetSituation'
+    name: 'assetSituation',
+    meta: {
+      type: 'largeScreen'
+    }
   },
   {
     path: '/situationAwareness/interAttackSituation',
     component: () =>
       import('@/views/situationAwareness/interAttackSituation.vue'),
-    name: 'interAttackSituation'
+    name: 'interAttackSituation',
+    meta: {
+      type: 'largeScreen'
+    }
   },
   {
     path: '/situationAwareness/exterAttackSituation',
     component: () =>
       import('@/views/situationAwareness/exterAttackSituation.vue'),
-    name: 'exterAttackSituation'
+    name: 'exterAttackSituation',
+    meta: {
+      type: 'largeScreen'
+    }
   }
 ]

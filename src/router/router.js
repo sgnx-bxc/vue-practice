@@ -255,7 +255,8 @@ function getAsyncPageRouterRightsLoop(menuList, menusBack, newMenuList = []) {
             component: needObj.component,
             name: needObj.name,
             meta: {
-              name: menu.menuName
+              name: menu.menuName,
+              type: needObj.meta.type
             }
           }
           newMenuList.push(obj)

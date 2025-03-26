@@ -22,3 +22,35 @@
   opacity: 0;
   transform: translateX(30px);
 }
+
+// 大屏路由页面切换，过渡效果
+// 左滑
+.layout-fade-left-enter {
+  opacity: 0;
+  transform: translateX(1920px);
+}
+.layout-fade-left-leave-to {
+  opacity: 0;
+  transform: translateX(1920px);
+}
+.layout-fade-left-leave-active {
+  transition: all 0.5s;
+}
+.layout-fade-left-active {
+  transition: all 0.3s ease;
+}
+// 右滑
+.layout-fade-right-enter {
+  opacity: 0;
+  transform: translateX(-1920px);
+}
+.layout-fade-right-leave-to {
+  opacity: 0;
+  transform: translateX(-1920px);
+}
+.layout-fade-right-leave-active {
+  transition: all 0.5s;
+}
+.layout-fade-right-active {
+  transition: all 0.3s ease;
+}
