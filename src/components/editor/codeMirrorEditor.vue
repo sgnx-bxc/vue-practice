@@ -143,14 +143,14 @@ export default {
     width: 100%;
     height: 100%;
   }
-  .CodeMirror-hints {
-    z-index: 9999 !important;
-  }
   .custom-class .CodeMirror {
     width: 100%;
   }
 }
 .CodeMirror-hints {
-  z-index: 1000;
+  z-index: 9999 !important;
+}
+.CodeMirror-lint-tooltip {
+  z-index: 9999 !important;
 }
 </style>
