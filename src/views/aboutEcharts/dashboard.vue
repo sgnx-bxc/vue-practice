@@ -5,7 +5,7 @@
     <!-- 1.最上层固定内容 -->
     <div class="first-fixed">
       <div class="fixed-over-left">
-        <div class="over-left-labelOne">Salaxy已安全守护您的资产</div>
+        <div class="over-left-labelOne">季博达已安全守护您的资产</div>
         <div class="install-time-chart">
           <installTimeChart ref="installTimeChartRef"></installTimeChart>
         </div>
