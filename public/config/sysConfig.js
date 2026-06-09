@@ -45,6 +45,8 @@ const sysConfig = {
       posttabsuserManageList: false, // 页面级tab-用户管理-用户管理列表
       posttabsroleDict: false, // 页面级tab-用户管理-角色查询
       posttabsaccountOriginData: false, // 页面级tab-用户管理-编辑用户原数据
+      /** g6&x6 */
+      postg6orx6baseg6Info: false, // 基础G6-关系图数据
       /* 不模拟的接口 */
       getdefaultport: false
     }
